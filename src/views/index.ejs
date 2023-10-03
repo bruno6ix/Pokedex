@@ -7,6 +7,20 @@
     <title>Pokedex</title>
 </head>
 <body>
+    <header>
+        <nav>
+            <ul>
+                <div class="title-nav">
+                    <h2>Mi Pokedex</h2>
+                </div>
+                <form action="/buscar" method="POST">
+                    <div class="buscador">
+                        <input type="text" name="titulo" id="titulo">
+                    </div>
+                </form>
+            </ul>
+        </nav>
+    </header>
     <main>
         <section>
             <% if (pokemonList && pokemonList.length > 0) { %>
