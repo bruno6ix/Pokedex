@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/index.css">
+    <title>Pokedex</title>
+</head>
+<body>
+    <main>
+        <section>
+            <% if (pokemonList && pokemonList.length > 0) { %>
+                <% pokemonList.forEach(pokemon => { %>
+                    <div class="caja-pokemon">
+                        <div class="imagen-pokemon">
+                            <img src="<%= pokemon.imageUrl %>">
+                        </div>
+                        <div class="nombre-pokemon">
+                            <p><%= pokemon.name %></p>
+                        </div>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p>Sin datos</p>
+            <% } %>
+        </section>
+    </main>
+    
+</body>
+</html>
