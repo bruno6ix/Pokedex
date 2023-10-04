@@ -12,7 +12,7 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/', indexRouter);
+app.use('/pokemon', indexRouter);
 app.use('/api', apiRouter);
 
 app.listen('3001', () => console.log('Servidor corriendo en el puerto 3001'));

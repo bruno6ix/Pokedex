@@ -3,16 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> <%= pokemon.name %></title>
-    <link rel='stylesheet' href='/css/style.css' />
-
+    <link rel="stylesheet" href="/style/index.css">
+    <link rel="stylesheet" href="/style/detail.css">
+    <title>Detalle</title>
 </head>
 <body>
-    <h1>Nombre: <%= pokemon.name %> </h1>    
-    <br>
-    <figure>
-        <img src="<%= pokemon.url %>" alt="<%= pokemon.name %>">
-    </figure>
-</body>
 
+    <%- include ("./partials/navbar") %>
+
+        <section>
+            <div class="detail-pokemon">
+                <div class="image-pokemon">
+                    <img src="<%= result.imageUrl %>">
+                </div>
+                <div class="poke-info">
+                    <ul>
+                        <li><%= result.name %></li>
+                        <li><%= result.types %></li>
+                        <li><%= result.height %></li>
+                        <li><%= result.weight %></li>
+                        <li><%= result.moves %></li>
+                        <li><%= result.ability %></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+</body>
 </html>

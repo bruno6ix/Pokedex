@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Busqueda: <%= pokemon.name %></title>
+    <link rel="stylesheet" href="/style/index.css">
+</head>
+<body>
+
+    <%- include ("./partials/navbar") %>
+
+    <section>
+        <a class="card-hover" href="/pokemon/detail/<%= pokemon.id %>">
+            <div class="caja-pokemon">
+                <div class="imagen-pokemon">
+                    <img src="<%= pokemon.sprites.front_default %>">
+                </div>
+                <div class="nombre-pokemon">
+                    <p><%= pokemon.name %></p>
+                </div>
+            </div>
+        </a>
+    </section>
+</body>
+
+</html>

@@ -4,8 +4,10 @@ const mainController = require('../controller/mainController');
 const apiMainController = require('../controller/api/apiMainController');
 
 
-router.get('/', mainController.index);
+router.get('/list', mainController.index);
 
-router.post('/buscar', mainController.buscar);
+router.post('/resultado', mainController.buscar);
+
+router.get('/detail/:id', mainController.detail)
 
 module.exports = router;

@@ -7,24 +7,14 @@
     <title>Pokedex</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <div class="title-nav">
-                    <h2>Mi Pokedex</h2>
-                </div>
-                <form action="/buscar" method="POST">
-                    <div class="buscador">
-                        <input type="text" name="titulo" id="titulo">
-                    </div>
-                </form>
-            </ul>
-        </nav>
-    </header>
+
+    <%- include ("./partials/navbar") %>
+    
     <main>
         <section>
             <% if (pokemonList && pokemonList.length > 0) { %>
                 <% pokemonList.forEach(pokemon => { %>
+                <a class="card-hover" href="/pokemon/detail/<%= pokemon.id %>">
                     <div class="caja-pokemon">
                         <div class="imagen-pokemon">
                             <img src="<%= pokemon.imageUrl %>">
@@ -32,7 +22,11 @@
                         <div class="nombre-pokemon">
                             <p><%= pokemon.name %></p>
                         </div>
+                        <div class="nombre-pokemon">
+                            <p><%= pokemon.id %></p>
+                        </div>
                     </div>
+                </a>
                 <% }); %>
             <% } else { %>
                 <p>Sin datos</p>
