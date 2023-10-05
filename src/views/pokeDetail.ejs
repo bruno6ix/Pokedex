@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style/index.css">
     <link rel="stylesheet" href="/style/detail.css">
+    <link rel="shortcut icon" href="/img/pokedex.png" type="image/x-icon">
     <title>Detalle</title>
 </head>
 <body>
@@ -12,21 +13,42 @@
     <%- include ("./partials/navbar") %>
 
         <section>
+          <div class="caja-princ-pokemon">
+            <div class="info-prin">
+                <div class="name-pokemon">
+                    <p><%= result.name %> <span>ID: <%= result.id %></span></p>
+                </div>
+            </div>
             <div class="detail-pokemon">
                 <div class="image-pokemon">
                     <img src="<%= result.imageUrl %>">
                 </div>
                 <div class="poke-info">
                     <ul>
-                        <li><%= result.name %></li>
-                        <li><%= result.types %></li>
-                        <li><%= result.height %></li>
-                        <li><%= result.weight %></li>
-                        <li><%= result.moves %></li>
-                        <li><%= result.ability %></li>
+                        <!-- <li><%= result.desc %></li> -->
+                        <div class="first-part"></div>
+                        <li>Tipo: 
+                            <p><%= result.types %></p>
+                        </li>
+                        <li>Altura:
+                            <p><%= result.height %></p>
+                        </li>
+                        <li>Peso:
+                            <p><%= result.weight %></p>
+                        </li>
+                        <div class="second-part"></div>
+                        <!-- <li>Stats: <%= result.stats %></li> -->
+                       <!-- <li>Movimientos: <%= result.moves %></li> -->
+                        <li>Habilidades: 
+                            <p><%= result.ability %></p>
+                        </li>
+                        <li>Evoluciones:
+                            <p><%= result.evolution %></p>
+                        </li>
                     </ul>
                 </div>
             </div>
+           </div>
         </section>
 </body>
 </html>

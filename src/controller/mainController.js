@@ -1,3 +1,5 @@
+const { parse } = require("path");
+
 const API = 'https://pokeapi.co/api/v2/pokemon';
 
 const mainController = {
@@ -48,41 +50,64 @@ const mainController = {
     'detail': async (req, res) => {
         try {
             const { id } = req.params;
-            const response = await fetch(`${API}/${id.toLowerCase()}`);
-            
-            if (!response.ok) {
-                throw new Error(`Error al obtener el detalle del Pokémon: ${response.statusText}`);
+    
+            const [pokemonRes, speciesRes] = await Promise.all([
+                fetch(`${API}/${id.toLowerCase()}`),
+                fetch(`https://pokeapi.co/api/v2/pokemon-species/${id.toLowerCase()}`)
+            ]);
+    
+            if (!pokemonRes.ok || !speciesRes.ok) {
+                res.redirect('/pokemon/list')
             }
-
-            const pokemon = await response.json();
-            const pokemonId = pokemon.id;
-            const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
-            const types = pokemon.types.map((typesObj) => typesObj.type.name)
-            const abilities = pokemon.abilities.map((abilityObj) => abilityObj.ability.name);
-            const moves = pokemon.moves.map((movesObj) => movesObj.move.name);
-            const stats = pokemon.stats.map((statsObj) => [statsObj.stat.name + ' ' + statsObj.base_stat]);
-            
-
+    
+            const [pokemonData, speciesData] = await Promise.all([
+                pokemonRes.json(),
+                speciesRes.json()
+            ]);
+    
+            const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png`;
+            const types = pokemonData.types.map(({ type }) => type.name);
+            const abilities = pokemonData.abilities.map(({ ability }) => ability.name);
+            const moves = pokemonData.moves.map(({ move }) => move.name);
+            const stats = pokemonData.stats.map(({ stat, base_stat }) => `${stat.name} ${base_stat}`);
+            const lang = "es";
+            const desc = speciesData.flavor_text_entries.find((entry) => entry.language.name === lang)?.flavor_text || '';
+    
+            const infoChainRes = await fetch(speciesData.evolution_chain.url);
+            if (!infoChainRes.ok) {
+                res.redirect('/pokemon/list')
+            }
+            const infoEvo = await infoChainRes.json();
+    
+            const extraerEvo = (chain) => {
+                const speciesName = chain.species.name;
+                const evolvesTo = chain.evolves_to.map(extraerEvo);
+                return [speciesName, ...evolvesTo];
+            };
+    
+            const evolutionDetails = extraerEvo(infoEvo.chain);
+    
             const pokemonDetail = {
-                name: pokemon.name,
-                height: pokemon.height,
-                weight: pokemon.weight,
+                name: pokemonData.name,
+                desc: desc,
+                height: pokemonData.height,
+                weight: pokemonData.weight,
                 types: types,
                 ability: abilities,
                 moves: moves,
                 stats: stats,
                 imageUrl: imageUrl,
-                id: pokemonId
+                id: pokemonData.id,
+                evolution: evolutionDetails,
             };
-
-            console.log(pokemonDetail)
-
+    
             res.render('pokeDetail.ejs', { result: pokemonDetail });
         } catch (error) {
             console.error(error);
             res.status(500).send('Error al obtener el detalle del Pokémon');
         }
-    }
+    }    
+
 }
 
 module.exports = mainController;

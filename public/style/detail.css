@@ -1,1 +1,40 @@
 @import url('navbar.css');
+
+.caja-princ-pokemon {
+    display: block;
+    margin: 0 auto;
+    width: 300px;
+}
+
+.info-prin {
+    text-align: center;
+}
+
+.image-pokemon img{
+    background-color: white;
+    border-radius: 5px;
+    width: 300px;
+    min-width: 250px;
+}
+
+.poke-info ul li {
+    list-style: none;
+}
+
+.poke-info li {
+    padding: 5px;
+    color: white;
+}
+
+.poke-info li p{
+    color: black;
+}
+
+.poke-info {
+    background-color: rgb(72, 129, 235);
+    border-radius: 5px;
+    width: 100%;
+    height: 300px;
+    min-height: 100px;
+    padding: 20px;
+}
