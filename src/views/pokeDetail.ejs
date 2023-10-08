@@ -12,6 +12,8 @@
 
     <%- include ("./partials/navbar") %>
 
+    <main>
+
         <section>
           <div class="caja-princ-pokemon">
             <div class="info-prin">
@@ -25,8 +27,7 @@
                 </div>
                 <div class="poke-info">
                     <ul>
-                        <!-- <li><%= result.desc %></li> -->
-                        <div class="first-part"></div>
+                     <div class="first-part">
                         <li>Tipo: 
                             <p><%= result.types %></p>
                         </li>
@@ -36,19 +37,23 @@
                         <li>Peso:
                             <p><%= result.weight %></p>
                         </li>
-                        <div class="second-part"></div>
-                        <!-- <li>Stats: <%= result.stats %></li> -->
-                       <!-- <li>Movimientos: <%= result.moves %></li> -->
+                        <li>Descripción:
+                            <p><%= result.desc %></p>
+                        </li>
                         <li>Habilidades: 
                             <p><%= result.ability %></p>
                         </li>
-                        <li>Evoluciones:
+                        <li>Cadena Evolutiva:
                             <p><%= result.evolution %></p>
                         </li>
+                     </div>
+                        <!-- <li>Stats: <%= result.stats %></li> -->
+                       <!-- <li>Movimientos: <%= result.moves %></li> -->
                     </ul>
                 </div>
             </div>
            </div>
         </section>
+    </main>
 </body>
 </html>

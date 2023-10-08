@@ -9,7 +9,7 @@ const mainController = {
             const pokemonList = await response.json();
             const pokemonImg = pokemonList.results.map((pokemon) => {
             const id = pokemon.url.split('/').slice(-2, -1);
-            const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+            const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
                 return {
                     name: pokemon.name,
                     imageUrl: imageUrl,
@@ -65,7 +65,7 @@ const mainController = {
                 speciesRes.json()
             ]);
     
-            const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png`;
+            const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonData.id}.png`;
             const types = pokemonData.types.map(({ type }) => type.name);
             const abilities = pokemonData.abilities.map(({ ability }) => ability.name);
             const moves = pokemonData.moves.map(({ move }) => move.name);
@@ -104,7 +104,7 @@ const mainController = {
             res.render('pokeDetail.ejs', { result: pokemonDetail });
         } catch (error) {
             console.error(error);
-            res.status(500).send('Error al obtener el detalle del Pokémon');
+            res.redirect('/pokemon/list');
         }
     }    
 
